@@ -190,19 +190,5 @@ kebeles$
   m$dependencies = c(m$dependencies,
                      leafletDependencies$bootstrap())
 
-library(htmltools)
-browsable(
-  tagList(list(
-    tags$head(
-      tags$style(
-        .mypopup.leaflet-popup-content-wrapper{
-          background-color: white;
-          opacity: 0.9
-        }
-      )
-    ),
-    m
-  ))
-)
 
 
