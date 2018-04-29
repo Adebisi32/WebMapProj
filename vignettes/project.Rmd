@@ -33,7 +33,6 @@ ui <- fluidPage(
 # etc.
 ```
 
-
 ```{r }
 sheet<- gs_key('1hT9JHKGhKR1QcUDB8ylylURmgxoIkylLd4SF9zqdTVo')
 kebele <- shapefile("F:/Spring2018/Web Mapping/Project/WebMap1/inst/extdata/kebeles.shp")
