@@ -1,0 +1,13 @@
+Package: WebMapProj
+Type: Package
+Title: Project Ethiopia
+Version: 0.1.0
+Author: Adebisi and Nara
+Maintainer: Adebisi Adeyemi <adadeyemi@clarku.edu>
+Description: Web map project for project Ethiopia
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
