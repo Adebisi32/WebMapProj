@@ -5,6 +5,7 @@ library("rgdal")
 library("raster")
 library("sp")
 library("mapview")
+library("shinymaterial")
 shinyServer(function (input, output) {
   output$map <- renderLeaflet({
   })
