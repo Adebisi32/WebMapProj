@@ -11,7 +11,12 @@ library(htmltools)
 setwd("F:/Spring2018/Web Mapping/Project/WebMap1/")
 
 sheet<- gs_key('1hT9JHKGhKR1QcUDB8ylylURmgxoIkylLd4SF9zqdTVo')
+
+Schoolpoints<- sheet %>% gs_read(ws = 1, range = "A1:R18")
+
 kebele <- shapefile("inst/extdata/kebeles.shp")
+
+
 class(kebele)
 head(kebele)
 
@@ -56,9 +61,9 @@ m <- leaflet() %>%
   #addProviderTiles("Stamen.Terrain") %>%
   setView(36.776, 11.242, zoom = 10)%>%
   addLegend("bottomright", colors = c("YlOrRd", '#191970'), labels = c("University Awards", "School Points"))
-#addLayersControl(
-#overlayGroups = c("School Points", "University Awards"),
-#options = layersControlOptions(collapsed = FALSE)
+  #addLayersControl(
+  #overlayGroups = c("School Points", "University Awards"),
+  #options = layersControlOptions(collapsed = FALSE)
 
 #create color palette for UniT2012
 #create color palette for UniT2012
@@ -69,8 +74,8 @@ palUniT <- colorBin(
   bins=bins1
 )
 #pal <- colorFactor(
-# palette = "BuPu",
-#domain = kebeles$UniT2012,
+ # palette = "BuPu",
+  #domain = kebeles$UniT2012,
 #)
 
 # add UniT data to the map
@@ -87,23 +92,23 @@ m <- addPolygons(m,
                  popup = paste("Number of University Transition Awards: ", kebeles$UniT2012, sep="")
 )
 m <- m %>% addCircles(data=Schoolpoints,
-                      lat = ~Lat, lng = ~Lng,
-                      radius = 60,
-                      color = '#191970',
-                      label = Schoolpoints$`School Name`,
-                      labelOptions = labelOptions(
-                        style = list(
-                          "color"= "black",
-                          "font-size" = "12px",
-                          "border-color" = "rgba(0,0,0,0.5)")),
+                     lat = ~Lat, lng = ~Lng,
+                     radius = 60,
+                     color = '#191970',
+                     label = Schoolpoints$`School Name`,
+                     labelOptions = labelOptions(
+                       style = list(
+                         "color"= "black",
+                         "font-size" = "12px",
+                         "border-color" = "rgba(0,0,0,0.5)")),
 
-                      popup = paste('<h5 style="color:white;">',"Name:", Schoolpoints$`School Name`, '</h5>', "<br>",
-                                    '<h8 style="color:white;">',"New Buildings:", Schoolpoints$`New Buildings`,'</h8>', "<br>",
-                                    '<h8 style="color:white;">', "New Classrooms:", Schoolpoints$`New Classrooms`, '</h8>', "<br>",
-                                    '<h8 style="color:white;">', "Wells:", Schoolpoints$Wells, '</h8>', "<br>",
-                                    '<h8 style="color:white;">', "Piped Water:", Schoolpoints$`piped water system`, '</h8>', "<br>",
-                                    '<h8 style="color:white;">', "Latrines:", Schoolpoints$` Latrines `, '</h8>', "<br>",
-                                    popupImage(Schoolpoints$photos)))
+                     popup = paste('<h5 style="color:white;">',"Name:", Schoolpoints$`School Name`, '</h5>', "<br>",
+                                   '<h8 style="color:white;">',"New Buildings:", Schoolpoints$`New Buildings`,'</h8>', "<br>",
+                                   '<h8 style="color:white;">', "New Classrooms:", Schoolpoints$`New Classrooms`, '</h8>', "<br>",
+                                   '<h8 style="color:white;">', "Wells:", Schoolpoints$Wells, '</h8>', "<br>",
+                                   '<h8 style="color:white;">', "Piped Water:", Schoolpoints$`piped water system`, '</h8>', "<br>",
+                                   '<h8 style="color:white;">', "Latrines:", Schoolpoints$` Latrines `, '</h8>', "<br>",
+                                   popupImage(Schoolpoints$photos)))
 
 
 
@@ -138,13 +143,13 @@ HV <- addPolygons(HV,
                                                       bringToFront = TRUE),
                   fillColor = ~palHV(kebeles$Homes),
                   popup = paste("Kebele:", kebeles$kebele, "<br>",
-                                "Homes:", kebeles$Homes, "<br>",
-                                "Wells:", kebeles$Wells, "<br>",
-                                "PipedWater:", kebeles$`Piped water`,"<br>",
-                                "CementFloors:", kebeles$`Cement Floors`,"<br>",
-                                "MetalRoofs:", kebeles$`Metal Roofs`, "<br>",
-                                "SolarLanterns:", kebeles$`Solar lanterns`, "<br>",
-                                "Latrines:", kebeles$Latrines, "<br>",
+                               "Homes:", kebeles$Homes, "<br>",
+                               "Wells:", kebeles$Wells, "<br>",
+                               "PipedWater:", kebeles$`Piped water`,"<br>",
+                               "CementFloors:", kebeles$`Cement Floors`,"<br>",
+                               "MetalRoofs:", kebeles$`Metal Roofs`, "<br>",
+                               "SolarLanterns:", kebeles$`Solar lanterns`, "<br>",
+                               "Latrines:", kebeles$Latrines, "<br>",
                                 popupImage(kebeles$HVphotos)))
 
 
@@ -187,8 +192,23 @@ EO <- addPolygons(EO,
                                 popupImage(kebeles$EOphotos)))
 EO
 kebeles$
-  m$dependencies = c(m$dependencies,
-                     leafletDependencies$bootstrap())
+m$dependencies = c(m$dependencies,
+                   leafletDependencies$bootstrap())
+
+library(htmltools)
+browsable(
+  tagList(list(
+    tags$head(
+      tags$style(
+        .mypopup.leaflet-popup-content-wrapper{
+          background-color: white;
+          opacity: 0.9
+        }
+      )
+    ),
+    m
+  ))
+)
 
 
-
+install.packages("stringi")
