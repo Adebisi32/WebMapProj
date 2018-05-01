@@ -8,7 +8,7 @@ library("shapefiles")
 library(htmltools)
 library(htmltools)
 #getwd()
-setwd("F:/Spring2018/Web Mapping/Project/WebMap1/")
+#setwd("F:/Spring2018/Web Mapping/Project/WebMap1/")
 
 sheet<- gs_key('1hT9JHKGhKR1QcUDB8ylylURmgxoIkylLd4SF9zqdTVo')
 
