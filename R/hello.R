@@ -191,24 +191,4 @@ EO <- addPolygons(EO,
                                 '<h8 style="color:white;">', "Wells:", kebelef$`Farmer's Association members assisted`, '</h8>', "<br>",
                                 popupImage(kebeles$EOphotos)))
 EO
-kebeles$
-m$dependencies = c(m$dependencies,
-                   leafletDependencies$bootstrap())
 
-library(htmltools)
-browsable(
-  tagList(list(
-    tags$head(
-      tags$style(
-        .mypopup.leaflet-popup-content-wrapper{
-          background-color: white;
-          opacity: 0.9
-        }
-      )
-    ),
-    m
-  ))
-)
-
-
-install.packages("stringi")
