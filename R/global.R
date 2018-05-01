@@ -7,7 +7,7 @@ library("sp")
 library("mapview")
 library("shinymaterial")
 
-setwd("F:/Spring2018/Web Mapping/Project/WebMap/")
+#setwd("F:/Spring2018/Web Mapping/Project/WebMap/")
 sheet<- gs_key('1hT9JHKGhKR1QcUDB8ylylURmgxoIkylLd4SF9zqdTVo')
 kebele<-shapefile("inst/extdata/kebeles.shp")
 #fnm1<- system.file("/extdata/kebeles.shp", package = "mapPE")
