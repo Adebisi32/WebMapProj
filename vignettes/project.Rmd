@@ -20,6 +20,7 @@ library(raster)
 library(sp)
 library(shapefiles)
 library(mapview)
+library(ProjEth)
 ```
 
 ```{r }
@@ -35,7 +36,8 @@ ui <- fluidPage(
 
 ```{r }
 sheet<- gs_key('1hT9JHKGhKR1QcUDB8ylylURmgxoIkylLd4SF9zqdTVo')
-kebele <- shapefile("F:/Spring2018/Web Mapping/Project/WebMap1/inst/extdata/kebeles.shp")
+fnm<- system.file("/extdata/kebeles.shp", package = "ProjEth")
+kebele <- shapefile(fnm)
 #class(kebele)
 #head(kebele)
 
@@ -84,7 +86,11 @@ palUniT <- colorBin(
 output$Educ <- renderLeaflet({
     leaflet() %>%
       addProviderTiles(providers$OpenStreetMap)%>%
-      setView(36.776, 11.242, zoom = 10)%>%
+      setView(36.776, 11.242, zoom = 10) %>%
+      addLegend("bottomright", pal = palUniT, values = kebeles$UniT2012,
+                title = "Number of Awards (2012)",
+                opacity = 1
+      )%>%
       addPolygons(data = kebeles,
                  color = "#444444",
                  weight = 1,
@@ -131,8 +137,12 @@ palHV <- colorBin(
 
 output$HV <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(providers$OpenStreetMap)%>%
+      addProviderTiles(providers$OpenStreetMap.HOT)%>%
       setView(36.776, 11.242, zoom = 10)%>%
+      addLegend("bottomright", pal = palHV, values = kebeles$Homes,
+                title = "Homes Improved",
+                opacity = 1
+      )%>%
       addPolygons(data = kebeles,
                   color = "#444444",
                   weight = 1,
@@ -179,8 +189,12 @@ palEO <- colorBin(
 # add economic opportunity data to the map
 output$EconOpp <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(providers$OpenStreetMap)%>%
+      addProviderTiles(providers$OpenStreetMap.DE)%>%
       setView(36.776, 11.242, zoom = 10)%>%
+      addLegend("bottomright", pal = palEO, values = kebeles$`Farmer's Association members assisted`,
+                title = "Farmers Assisted",
+                opacity = 1
+      )%>%
       addPolygons(data = kebeles,
                   color = "#444444",
                   weight = 1,
